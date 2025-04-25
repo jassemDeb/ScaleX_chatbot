@@ -21,6 +21,7 @@
 - [Backend](#-backend)
 - [Getting Started](#-getting-started)
 - [API Documentation](#-api-documentation)
+- [Internationalization (i18n)](#-internationalization-i18n)
 - [Docker Deployment](#-docker-deployment)
 - [Contributing](#-contributing)
 
@@ -223,6 +224,52 @@ The API documentation is available at the `/docs/` endpoint when the backend ser
 - `POST /api/chat/ai/`: Get AI-generated responses
 - `GET /api/summaries/`: Get user summaries
 - `POST /api/summaries/`: Create a new user summary
+
+## 🌐 Internationalization (i18n)
+
+ScaleX implements a comprehensive internationalization (i18n) system to support multiple languages. Currently, the application fully supports English and Arabic with complete interface translations.
+
+### i18n Implementation
+
+The internationalization system is built with the following components:
+
+- **I18nProvider**: A React context provider that manages the application's language state
+- **Locale Files**: JSON files containing translations for each supported language
+- **Translation Function**: A utility function (`t`) that retrieves translations based on the current locale
+- **RTL Support**: Automatic text direction switching based on the selected language
+
+### JSON Structure
+
+The translation files follow a hierarchical structure organized by features and components:
+
+```json
+{
+  "section": {
+    "key": "Translation value",
+    "nestedSection": {
+      "nestedKey": "Nested translation value"
+    }
+  }
+}
+```
+
+Translation keys are accessed using dot notation (e.g., `section.key` or `section.nestedSection.nestedKey`).
+
+### Key Features
+
+- **Persistent Language Selection**: User language preference is saved in localStorage
+- **Automatic Direction Switching**: RTL/LTR layout changes based on language
+- **Nested Translation Keys**: Support for organizing translations in a logical hierarchy
+- **Fallback Mechanism**: Returns the key itself if a translation is not found
+
+### Adding New Languages
+
+To add a new language:
+
+1. Create a new JSON file in the `front/i18n/locales/` directory (e.g., `fr.json`)
+2. Copy the structure from an existing locale file
+3. Translate all values to the target language
+4. Add the new locale to the `Locale` type and `translations` object in `i18n-provider.tsx`
 
 ## 🐳 Docker Deployment
 
